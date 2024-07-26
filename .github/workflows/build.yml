@@ -13,11 +13,11 @@ jobs:
       - name: Check for existing release
         run: |
           # Check whether version contains SNAPSHOT
-          grep "^version" gradle.properties | grep -q SNAPSHOT && exit 0
-
-          # Extract version from gradle.properties
-          VERSION=$(grep "^version" gradle.properties | sed 's|^version=\(.*\)$|\1|g')
-          echo VERSION=$VERSION
+          grep "^version" gradle.properties | grep -q SNAPSHOT || {
+            # Extract version from gradle.properties
+            VERSION=$(grep "^version" gradle.properties | sed 's|^version=\(.*\)$|\1|g')
+            echo VERSION=$VERSION          
+          }
         env:
           ART_URL: 'https://hyperledger.jfrog.io/artifactory/besu-maven/org/hyperledger/besu'
         
