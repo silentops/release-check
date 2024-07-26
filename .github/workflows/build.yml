@@ -16,7 +16,12 @@ jobs:
           grep "^version" gradle.properties | grep -q SNAPSHOT || {
             # Extract version from gradle.properties
             VERSION=$(grep "^version" gradle.properties | sed 's|^version=\(.*\)$|\1|g')
-            echo VERSION=$VERSION          
+            echo VERSION=$VERSION
+            curl --head -L --silent --output /dev/null --fail $ART_URL/$VERSION &&  {
+              echo "ERROR: Found binary exist for the version [$VERSION]. Please check the version in gradle.properties"
+              echo "url $ART_URL/$VERSION"
+              exit 1
+            }         
           }
         env:
           ART_URL: 'https://hyperledger.jfrog.io/artifactory/besu-maven/org/hyperledger/besu'
