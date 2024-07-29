@@ -22,10 +22,10 @@ jobs:
               echo "ERROR: Found binary exist for the version [$VERSION]. Please check the version in gradle.properties"
               echo "url $ART_URL/$VERSION"
               exit 1
-            }         
+            }        
           }
         env:
-          ART_URL: 'https://hyperledger.jfrog.io/artifactory/besu-maven/org/hyperledger/besu'
+          ART_URL: 'https://hyperledger.jfrog.io/artifactory/besu-maven/org/hyperledger/besu/arithmetic'
         
       - name: Publish
         run: echo Publish to Artifactory      
